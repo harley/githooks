@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+require File.expand_path('../lib/git_hooks.rb', __FILE__)
+filename = ARGV.first
+GitHooks.convert_PT_story_ids_to_links filename
+
