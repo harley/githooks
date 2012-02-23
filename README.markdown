@@ -1,7 +1,9 @@
 # A collection of useful and tested git hooks
 ## Installation
 
-Grab the hook file from `/release` folder and drop in your .git/hooks folder in the git repo you want the hook to trigger. You are encouraged to clone this repository first and test the hook yourself, however.
+Grab the hook file from `/release` folder and drop in your .git/hooks folder in the git repo you want the hook to trigger. Make sure to turn on the executable flag on the hook files. E.g. `chmod +x .git/hooks/commit-msg`
+
+You are encouraged to clone this repository first and test the hook yourself ;-) If things don't seem to work as expected, feel free to file an issue (Github Issue) under this project.
 
 ## Development
 
