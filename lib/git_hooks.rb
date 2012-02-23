@@ -1,10 +1,11 @@
 module GitHooks
   # detect for story ids in commit message and append the message with links to the mentioned stories
   # using message syntax explained here https://www.pivotaltracker.com/help/api?version=v3#scm_post_commit_message_syntax
-  def self.convert_PT_story_ids_to_links(filename)
+  def self.append_with_PT_links_if_applicable(filename)
     message = File.read filename
     unless (story_links = get_story_links(message)).empty?
       File.open(filename, 'a') do |f|
+        f.puts
         f.puts story_links*"\n"
       end
     end

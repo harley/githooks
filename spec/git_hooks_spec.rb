@@ -2,14 +2,14 @@ require File.expand_path('../../spec/spec_helper', __FILE__)
 require 'tempfile'
 
 describe GitHooks do
-  describe ".convert_PT_story_ids_to_links" do
+  describe ".append_with_PT_links_if_applicable" do
     it "must leave the file untouched if no link is file" do
       temp = Tempfile.new "temp"
       begin
         orig = "this message has not PT link in it"
         temp.write orig
         temp.rewind
-        GitHooks.convert_PT_story_ids_to_links temp.path
+        GitHooks.append_with_PT_links_if_applicable temp.path
         assert_equal temp.read, orig
       ensure
         temp.close
@@ -23,7 +23,7 @@ describe GitHooks do
         orig = "[Fix #123] see the PT story id in here?"
         temp.write orig
         temp.rewind
-        GitHooks.convert_PT_story_ids_to_links temp.path
+        GitHooks.append_with_PT_links_if_applicable temp.path
         assert_equal temp.read, "#{orig}\nhttps://www.pivotaltracker.com/story/show/123\n"
       ensure
         temp.close
