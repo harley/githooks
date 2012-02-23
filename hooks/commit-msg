@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+require File.expand_path('../lib/git_hooks.rb', __FILE__)
+filename = ARGV.first
+GitHooks.append_with_PT_links_if_applicable filename
+

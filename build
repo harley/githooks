@@ -1,0 +1,27 @@
+#! /usr/bin/env ruby
+
+# build hooks -- we need to inline files that are included
+# assumption: these hooks do not directly 'require' from gem or standard libraries
+hooks = %(commit-msg)
+
+hooks.each do |hook|
+  input = File.expand_path("../hooks/#{hook}", __FILE__)
+  output = File.expand_path("../release/#{hook}", __FILE__)
+  puts "* Preparing to build from #{input}"
+  begin
+    infile = File.open(input, "r")
+    outfile = File.open(output, "w")
+    infile.each do |line|
+      if m = line.match(/^require\s+(.+)$/) and m[1]
+        included_file = eval m[1]
+        puts "** Inlining file #{included_file} into #{input}"
+        outfile.puts File.read(included_file)
+      else
+        outfile.puts line
+      end
+    end
+  ensure
+    infile.close
+    outfile.close
+  end
+end
